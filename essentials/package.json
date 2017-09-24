@@ -1,13 +1,14 @@
 {
- "name": "udemy-js-essentials",
- "version": "0.0.1",
- "scripts": {
-     "test": "jest"
- },
- "repository": {     
- },
- "author": "Ivan Ka",
- "devDependencies": {
-     "jest": "^21.1.0"
- }
+    "name": "udemy-js-essentials",
+    "version": "0.0.1",
+    "description": "Udemy Javascript Essentials Course",
+    "license": "Unlicense",
+    "scripts": {
+        "test": "jest --coverage"
+    },
+    "repository": {},
+    "author": "Ivan Ka",
+    "devDependencies": {
+        "jest": "^21.1.0"
+    }
 }
