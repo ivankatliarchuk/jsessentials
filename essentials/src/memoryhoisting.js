@@ -1,9 +1,8 @@
-console.log(myName, printName());
+//console.log(myName, printName());
 
 var myName = 'Lawrence';
 
-function printName() {
-    console.log(a);
+function printName() {    
     var a = 100;
     return "John Doe";
 }

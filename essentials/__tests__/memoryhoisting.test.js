@@ -9,4 +9,4 @@ describe('memory hoisting test', () => {
     it('hoists the memory', () => {
       expect(name()).toBe('John Doe');
     }); 
-  });
+});
