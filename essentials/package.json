@@ -1,0 +1,13 @@
+{
+ "name": "udemy-js-essentials",
+ "version": "0.0.1",
+ "scripts": {
+     "test": "jest"
+ },
+ "repository": {     
+ },
+ "author": "Ivan Ka",
+ "devDependencies": {
+     "jest": "^21.1.0"
+ }
+}
