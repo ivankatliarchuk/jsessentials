@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "ES6",
+      "checkJs": true,
+      "typeRoots": [
+        "node_modules/@types"
+      ]
+    },
+    "include": [
+        "src/*",
+        "__tests__/*"
+    ],
+    "types": [
+      "node",
+      "jest"
+    ]
+  }
