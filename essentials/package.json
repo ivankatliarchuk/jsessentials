@@ -9,6 +9,7 @@
     "repository": {},
     "author": "Ivan Ka",
     "devDependencies": {
+        "eslint-config-google": "^0.9.1",
         "jest": "^21.1.0"
     }
 }
