@@ -26,8 +26,10 @@ let array = [
     100,
     [ 'embed', 200],
     { car: "ford"},
-    () => { return "dive"}
+    () => { return "dive"},
+    'data',
+    'toremove'
 ];
 
-module.exports = car, array;
+module.exports = {car, array};
 
