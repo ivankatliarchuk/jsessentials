@@ -1,0 +1,7 @@
+{
+ "name": "js-essentials",
+ "jest": {
+   "bail": true,
+   "verbose": true
+ }
+}
