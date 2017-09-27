@@ -4,7 +4,6 @@
     "description": "Udemy Javascript Weird Parts Course",
     "license": "Unlicense",
     "scripts": {
-        "pretest": "npm install",
         "test": "jest --coverage"
     },
     "repository": {},
