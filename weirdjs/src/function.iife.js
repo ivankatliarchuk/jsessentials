@@ -6,16 +6,16 @@ function greet(name) {
 }
 
 // using a functiin expression
-var greetFunc = function(name) {    
+var greetFunc = function (name) {
     return `Hello ${name}`;
 }('Pedro');
 
 // standalone immediately invoked expression
-(function(name) {
+(function (name) {
     // console.log(name);
     return `Hello ${name}`;
 }('Function Expression'));
 
-module.exports = {greetFunc};
+module.exports = { greetFunc };
 
 
