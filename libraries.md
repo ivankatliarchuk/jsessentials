@@ -3,3 +3,7 @@
 [Work with date and time](https://momentjs.com/)
 
 [Babel JS compiler. ES6 noce library](http://babeljs.io/)
+
+[Date time library](https://www.npmjs.com/package/moment)
+
+[Hackaton Libraries](https://github.com/sahat/hackathon-starter/tree/es5#recommended-nodejs-libraries)
