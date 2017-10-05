@@ -5,12 +5,12 @@ let app = express();
 let port = process.env.PORT || 3000;
 let urlencodedParser = bodyParser.urlencoded({ extended: false });
 let jsonParser = bodyParser.json();
-app.use(jsonParser);
-app.use('/assets', express.static(__dirname + '/public'));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+app.use(jsonParser);
+app.use('/assets', express.static(__dirname + '/public'));
 app.use('/', function (req, res, next) {
 	console.log('Request Url:' + req.url);
 	next();
@@ -29,6 +29,7 @@ app.get('/api', function (reg, res) {
 });
 
 // curl -d '{"firstname":"John", "lastname":"Doe"}' -H "Content-Type: application/json" -X POST http://localhost:3000/person
+// urlencodedParser -> jsonparser can be used insted
 app.post('/person', urlencodedParser, function(req, res) {
     res.send('Thank you!');
     console.log(req.body.firstname);
