@@ -7,3 +7,5 @@
 [Date time library](https://www.npmjs.com/package/moment)
 
 [Hackaton Libraries](https://github.com/sahat/hackathon-starter/tree/es5#recommended-nodejs-libraries)
+
+[Express Generator](http://expressjs.com/en/starter/generator.html)

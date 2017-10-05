@@ -1,0 +1,25 @@
+version: '3'
+services:
+  mongodb:
+     image: tutum/mongodb:latest
+     container_name: "CONT-MONGO"
+     hostname: mongodb
+     ports:
+        - 27017:27017
+     environment:
+        - DATABASE_NAME=nodejs
+        - MONGODB_PASS=test
+        - MONGODB_USER=test
+     volumes:
+        - ./volumes/db:/data/db
+     networks:
+       internal:
+        ipv4_address: 172.16.11.6
+
+networks:
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          - subnet: 172.16.11.0/24         
