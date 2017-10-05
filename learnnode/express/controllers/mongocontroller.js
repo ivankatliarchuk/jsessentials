@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-mongoose.connect('mongodb://test:test@172.16.11.6/nodejs');
+mongoose.connect('mongodb://test:test@172.16.11.6:27017/nodejs');
 
 var Schema = mongoose.Schema;
 
