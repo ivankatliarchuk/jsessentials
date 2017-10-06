@@ -1,0 +1,4 @@
+1. A user can add, edit and delete 'todos'
+2. Each todo can be marked as complete
+3. Each todo can have one option file attachment
+4. One person cannot access the todos of another

@@ -9,3 +9,11 @@
 [Hackaton Libraries](https://github.com/sahat/hackathon-starter/tree/es5#recommended-nodejs-libraries)
 
 [Express Generator](http://expressjs.com/en/starter/generator.html)
+
+[Bluebird promises](https://www.npmjs.com/package/bluebird)
+
+========================FIXTURES==========================
+[Generate Json Data](https://www.npmjs.com/package/bluebird)
+
+--------------------<DATABASE>-----------------------------
+[Mongodb MLAB](https://mlab.com/)
