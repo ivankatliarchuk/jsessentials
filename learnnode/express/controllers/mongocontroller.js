@@ -1,5 +1,13 @@
 let mongoose = require('mongoose');
-mongoose.connect('mongodb://test:test@172.16.11.6:27017/nodejs');
+
+let mongodb = 'mongodb://172.16.11.6:27017/nodejs'
+mongoose.connect(mongodb, {
+	useMongoClient: true
+});
+
+// get default connection
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var Schema = mongoose.Schema;
 
@@ -37,12 +45,19 @@ jane.save(function (err) {
 	console.log('person saved!');
 });
 
-
+// curl -X GET http://localhost:3000/mongo/person/1
 module.exports = function (app) {
 
 	app.get('/mongo/person/:id', function (req, res) {
 		// get that data from database
-		res.json({ firstname: 'John', lastname: 'Doe' });
+		Person.find({}, function(err, users) {
+			if (err) throw err;
+			
+			// object of all the users
+			console.log(users);
+			res.json(users);
+		});
+		
 	});
 
 	app.post('/mongo/person', function (req, res) {

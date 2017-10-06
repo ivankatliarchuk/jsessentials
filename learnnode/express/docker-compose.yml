@@ -7,9 +7,9 @@ services:
      ports:
         - 27017:27017
      environment:
-        - DATABASE_NAME=nodejs
-        - MONGODB_PASS=test
-        - MONGODB_USER=test
+        - MONGODB_DATABASE=nodejs
+        - AUTH=no
+        - OPLOG_SIZE=50
      volumes:
         - ./volumes/db:/data/db
      networks:
