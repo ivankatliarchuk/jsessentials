@@ -7,14 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
+  "license": "ISC",  
+  "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.15.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "mongoose": "^4.4.7"
   },
-  "dependencies": {
-    "bluebird": "^3.5.1"
-  }
+  "devDependencies": {}
 }
