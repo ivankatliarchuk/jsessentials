@@ -12,6 +12,8 @@
 
 [Bluebird promises](https://www.npmjs.com/package/bluebird)
 
+[Typescript](http://www.typescriptlang.org/)
+
 ========================FIXTURES==========================
 [Generate Json Data](https://www.npmjs.com/package/bluebird)
 
