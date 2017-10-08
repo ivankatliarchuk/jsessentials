@@ -22,7 +22,7 @@ let addNote = (title, body) => {
         if (duplicates.length > 0) {
             throw Error('duplicate note found');
         }
-        return duplicates;
+        return data;
     }).then((data) => {
         data.push(note);
         return data;
