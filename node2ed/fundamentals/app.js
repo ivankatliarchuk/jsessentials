@@ -13,7 +13,7 @@ let command = process.argv[2];
 switch (command) {
     case 'add':
         // node app.js add --title=secret --body="This is my secret"
-        notes.addNote(argv.title, argv.body).then((data) => {            
+        notes.addNote(argv.title, argv.body).then((data) => {
             console.log("Note created", data.title);
         },
             (err) => { console.error('Not not created:', err.message); }
@@ -21,13 +21,21 @@ switch (command) {
         break;
     case 'list':
         // node app.js list
-        notes.getAll();
+        notes.getAll(argv.title).then((data) => {
+            console.log(`Notes Found\n${JSON.stringify(data, null, 2)}`);
+        },
+            (err) => { console.error('Not not found:', err.message); }
+        );
         break;
     case 'read':
         // node app.js read --title first
-        notes.getNote(argv.title);
+        notes.getNote(argv.title).then((data) => {
+            console.log(`Note Found\n${JSON.stringify(data, null, 2)}`);
+        },
+            (err) => { console.error('Not not found:', err.message); }
+        );
         break;
-    case 'remove':        
+    case 'remove':
         notes.remove(argv.title).then((data) => {
             console.log("Note removed", data);
         },

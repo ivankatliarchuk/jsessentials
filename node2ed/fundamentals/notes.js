@@ -56,12 +56,29 @@ let addNote = (title, body) => {
 };
 
 let getAll = () => {
-    console.log('Geggint all notes');
-    return null;
+    return fetchNotes('notes.json').then((data) => {
+        if (data.length) {
+            return data;
+        } else {
+            throw Error('Notes not FOUND');
+        }
+    }).catch((err) => {
+        throw err;
+    });
 };
 
 let getNote = (title) => {
-    console.log('Found note', title);
+    return fetchNotes('notes.json').then((data) => {
+        return _.filter(data, ['title', title]);
+    }).then((data) => {
+        if (data.length) {
+            return data[0];
+        } else {
+            throw Error('Note not FOUND');
+        }
+    }).catch((err) => {
+        throw err;
+    });
 };
 
 let remove = (title) => {
