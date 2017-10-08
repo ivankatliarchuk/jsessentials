@@ -19,3 +19,6 @@
 
 --------------------<DATABASE>-----------------------------
 [Mongodb MLAB](https://mlab.com/)
+
+-----------------------UTILITIES---------------------------
+[Lodash](https://lodash.com/)

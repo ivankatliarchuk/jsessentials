@@ -1,16 +1,16 @@
 {
-  "name": "typescript-tutorial",
+  "name": "nodejs-fundamentals",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {
-    "@types/node": "^8.0.30",
-    "typescript": "^2.5.3"
-  }
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "yargs": "^9.0.1"
+  },
+  "devDependencies": {}
 }
