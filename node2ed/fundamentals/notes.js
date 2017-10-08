@@ -3,18 +3,27 @@ console.log('Starting notes.js');
 const Promise = require("bluebird");
 const fs = Promise.promisifyAll(require('fs'));
 
+let fetchNotes = new Promise((resolve, reject) => {
+    fs.readFileAsync(__dirname + '/notes.json', 'utf8').then((data) => {
+        data ? resolve(JSON.parse(data)) : [];
+    })
+});
+
+let saveNotes = (notes) => {
+    new Promise((resolve, reject) => {
+        fs.writeFileAsync(__dirname + '/notes.json', JSON.stringify(notes, null, 2), 'utf8', (err) => {
+            if (err) reject(err);
+            else resolve(JSON.stringify(notes, null, 4));
+        });
+    })
+};
+
 let addNote = (title, body) => {
     let note = {
         title,
         body
     };
-    fs.readFileAsync(__dirname + '/notes.json', 'utf8').then((data) => {
-        if (data) {
-            return JSON.parse(data);
-        } else {
-            return [];
-        }
-    }).then((data) => {
+    fetchNotes.then((data) => {
         // filter notes
         let duplicates = data.filter((note) => {
             return note.title === title;
@@ -26,14 +35,7 @@ let addNote = (title, body) => {
     }).then((data) => {
         data.push(note);
         return data;
-    }).then((data) => {
-        return new Promise((resolve, reject) => {
-            fs.writeFileAsync(__dirname + '/notes.json', JSON.stringify(data, null, 2), 'utf8', (err) => {
-                if (err) reject(err);
-                else resolve(JSON.stringify(data, null, 4));
-            });
-        });
-    }).then((json) => {
+    }).then(saveNotes).then((json) => {
         if (json) {
             console.log('Succeed');
         } else {
