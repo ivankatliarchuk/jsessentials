@@ -3,19 +3,25 @@ console.log('Starting notes.js');
 const Promise = require("bluebird");
 const fs = Promise.promisifyAll(require('fs'));
 
-let fetchNotes = new Promise((resolve, reject) => {
-    fs.readFileAsync(__dirname + '/notes.json', 'utf8').then((data) => {
-        data ? resolve(JSON.parse(data)) : [];
+let fetchNotes = (file) => {
+    return new Promise((resolve, reject) => {
+        fs.readFileAsync(`${__dirname}/${file}`, 'utf8').then((data) => {
+            data ? resolve(JSON.parse(data)) : [];
+        },
+            (err) => { console.log('Error'); }
+        )
     })
-});
+};
 
-let saveNotes = (notes) => {
-    new Promise((resolve, reject) => {
-        fs.writeFileAsync(__dirname + '/notes.json', JSON.stringify(notes, null, 2), 'utf8', (err) => {
-            if (err) reject(err);
-            else resolve(JSON.stringify(notes, null, 4));
-        });
-    })
+let saveNotes = (file) => {
+    return (notes) => {
+        return new Promise((resolve, reject) => {
+            fs.writeFileAsync(`${__dirname}/${file}`, JSON.stringify(notes, null, 2), 'utf8', (err) => {
+                if (err) reject(err);
+                else resolve(JSON.stringify(notes, null, 4));
+            });
+        })
+    };
 };
 
 let addNote = (title, body) => {
@@ -23,7 +29,8 @@ let addNote = (title, body) => {
         title,
         body
     };
-    fetchNotes.then((data) => {
+    let result = [];
+    return fetchNotes('notes.json').then((data) => {
         // filter notes
         let duplicates = data.filter((note) => {
             return note.title === title;
@@ -35,14 +42,15 @@ let addNote = (title, body) => {
     }).then((data) => {
         data.push(note);
         return data;
-    }).then(saveNotes).then((json) => {
+    }).then(saveNotes('notes.json')).then((json) => {
         if (json) {
             console.log('Succeed');
         } else {
             console.log('No data written');
         }
+        return json;
     }).catch((err) => {
-        console.log('Error', err.message);
+        throw err;
     });
 };
 

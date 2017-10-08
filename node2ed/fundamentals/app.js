@@ -13,7 +13,11 @@ let command = process.argv[2];
 switch (command) {
     case 'add':
         // node app.js add --title=secret --body="This is my secret"
-        notes.addNote(argv.title, argv.body);
+        notes.addNote(argv.title, argv.body).then((data) => {
+            console.log("Note created", argv.title);
+        },
+            (err) => { console.error('Not not created:', err.message); }
+        );
         break;
     case 'list':
         // node app.js list
