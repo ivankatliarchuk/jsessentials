@@ -4,7 +4,6 @@ const Promise = require("bluebird");
 const fs = Promise.promisifyAll(require('fs'));
 
 let addNote = (title, body) => {
-    let notes = [];
     let note = {
         title,
         body
@@ -23,19 +22,29 @@ let addNote = (title, body) => {
             data.push(note);
             return data;
         }
-    ).then(         
+    ).then(
         (data) => {
             console.log(data);
             return data;
         }
-    ).then(
-        (data) => {            
-            fs.writeFileAsync(__dirname + '/notes.json', JSON.stringify(data, null, 2), 'utf8').then(
-                () => { console.log('Suceed'); },
-                (err) => { throw err; }
-            );
+    ).then((data) => {
+            return new Promise((resolve, reject) => {
+                fs.writeFileAsync(__dirname + '/notes.json', JSON.stringify(data, null, 2), 'utf8', (err) => {
+                    if (err) reject(err);
+                    else resolve(JSON.stringify(data, null, 4));
+                });
+            });
+    }).then((json) => {
+            if (json) {
+                console.log('Succeed');
+            } else {
+                console.log('No data written');
+            }
         }
-    ).catch(console.error);
+    ).catch((err) => {
+            console.log('Error', err.message);
+        }
+    );
 };
 
 let getAll = () => {
