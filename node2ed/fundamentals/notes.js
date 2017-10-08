@@ -2,6 +2,7 @@ console.log('Starting notes.js');
 
 const Promise = require("bluebird");
 const fs = Promise.promisifyAll(require('fs'));
+const _ = require('lodash');
 
 let fetchNotes = (file) => {
     return new Promise((resolve, reject) => {
@@ -48,7 +49,7 @@ let addNote = (title, body) => {
         } else {
             console.log('No data written');
         }
-        return json;
+        return note;
     }).catch((err) => {
         throw err;
     });
@@ -64,7 +65,18 @@ let getNote = (title) => {
 };
 
 let remove = (title) => {
-    console.log('Remove note', title);
+    return fetchNotes('notes.json').then((data) => {
+        // filter
+        if (_.filter(data, ['title', title]).length === 0) {
+            throw Error('Note not FOUND');
+        }
+        return _.filter(data, (o) => { return o.title !== title });
+    }).then(saveNotes('notes.json')).then((data) => {
+        return title;
+    }).catch((err) => {
+        throw err;
+    });
+
 };
 
 module.exports = {

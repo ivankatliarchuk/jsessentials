@@ -13,8 +13,8 @@ let command = process.argv[2];
 switch (command) {
     case 'add':
         // node app.js add --title=secret --body="This is my secret"
-        notes.addNote(argv.title, argv.body).then((data) => {
-            console.log("Note created", argv.title);
+        notes.addNote(argv.title, argv.body).then((data) => {            
+            console.log("Note created", data.title);
         },
             (err) => { console.error('Not not created:', err.message); }
         );
@@ -27,8 +27,12 @@ switch (command) {
         // node app.js read --title first
         notes.getNote(argv.title);
         break;
-    case 'remove':
-        notes.remove(argv.title);
+    case 'remove':        
+        notes.remove(argv.title).then((data) => {
+            console.log("Note removed", data);
+        },
+            (err) => { console.error('Note not removed:', err.message); }
+        );
         break;
     default:
         console.log('Command not recognized');
