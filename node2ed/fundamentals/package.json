@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.4",
-    "yargs": "^9.0.1"
+    "yargs": "^9.0.1",
+    "bluebird": "^3.5.1"
   },
   "devDependencies": {}
 }

@@ -8,7 +8,7 @@ const notes = require('./notes');
 
 const argv = yargs.argv;
 let command = process.argv[2];
-console.log('Yargs', argv);
+// console.log('Yargs', argv);
 
 switch (command) {
     case 'add':
