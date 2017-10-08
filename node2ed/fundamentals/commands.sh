@@ -7,3 +7,5 @@ node ${MAIN} remove --title=tobuy4
 
 node ${MAIN} read --title=tobuy4
 node ${MAIN} list
+
+node ${MAIN} add -t="flag title" -b="body"
