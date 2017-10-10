@@ -2,8 +2,8 @@
 
 const yargs = require('yargs');
 
-const config = require('./config');
 const geocode = require('./geocode/geocode');
+const weather = require('./weather/weather');
 
 const argv = yargs
     .options({
@@ -18,12 +18,14 @@ const argv = yargs
     .alias('help', 'h')
     .argv;
 
-geocode.geocodeAddress(argv.address).then(
-    (data) => {
+const request = require('request');
+
+geocode.geocodeAddress(argv.address)
+    .then((data) => {
         console.log(`Address: ${data.address}`);
-        console.log(`Latitude: ${data.latitude}`);
-        console.log(`Longiture: ${data.longitude}`);
-    }
-).catch((err) => {
-    console.log(err);
-});    
+        return weather.weatherForecast(data.latitude, data.longitude);
+    }).then((data) => {
+        console.log(`Current temperature in area ${data}`)
+    }).catch((err) => {
+        console.log(err);
+    });

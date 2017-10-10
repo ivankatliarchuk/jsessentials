@@ -2,6 +2,7 @@
 
 const request = require('request');
 const Promise = require('bluebird');
+
 // node app.js -a '1301 lombard street'
 module.exports.geocodeAddress = (address) => {
     return new Promise((resolve, reject) => {
