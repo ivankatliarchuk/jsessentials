@@ -1,2 +1,3 @@
 **/node_modules/*
 **/volumes/*
+/develop/repositories/javascript/node2ed/weatherapp/config/config.json
