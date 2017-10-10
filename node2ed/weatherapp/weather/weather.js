@@ -14,7 +14,10 @@ module.exports.weatherForecast = (lat, lng) => {
             if (error) {
                 reject('Unable to connect to forecast service');
             } else if (response.statusCode === 200) {
-                resolve(body.currently.temperature);
+                resolve({
+                    temperature: body.currently.temperature,
+                    apparentTemperature: body.currently.apparentTemperature
+                });
             } else {
                 reject('Unable to fetch weather');
             }
