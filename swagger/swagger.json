@@ -1,0 +1,314 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Locate premesis API",
+        "version": "2.0.0",
+        "title": "Location API"
+    },
+    "basePath": "/location/v1",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Locate premesis within a certain area.",
+                "description": "The location endpoint returns information about premises within a searched location.",
+                "operationId": "locationGET",
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "The search latitude.",
+                        "required": true,
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "The search longitude.",
+                        "required": true,
+                        "type": "number",
+                        "format": "decimal"
+                    },
+                    {
+                        "name": "maxDistance",
+                        "in": "query",
+                        "description": "The maximum distance in metres to find premesis from the search location. Default 10000 metres",
+                        "required": false,
+                        "type": "number",
+                        "format": "long"
+                    },
+                    {
+                        "name": "maxResult",
+                        "in": "query",
+                        "description": "The maximum number of premesis to find. Default 10",
+                        "required": false,
+                        "type": "number",
+                        "format": "long"
+                    },
+                    {
+                        "name": "availableServices",
+                        "in": "query",
+                        "description": "Filter by available services. e.g. Print in Store",
+                        "required": false,
+                        "type": "string",
+                        "format": "comma delimited"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A response",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-swagger-router-controller": "location"
+            }
+        },
+        "/admin/health": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Health check endpoint.",
+                "description": "The location endpoint returns own status information.",
+                "operationId": "health",
+                "responses": {
+                    "200": {
+                        "description": "A response",
+                        "schema": {
+                            "$ref": "#/definitions/Health"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-swagger-router-controller": "admin"
+            }
+        }
+    },
+    "definitions": {
+        "SuccessResponse": {
+            "type": "object",
+            "properties": {
+                "apiVersion": {
+                    "type": "string",
+                    "description": "The version of the api that generated the response."
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Location"
+                    }
+                }
+            }
+        },
+        "ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "apiVersion": {
+                    "type": "integer",
+                    "description": "The version of the api that generated the response."
+                },
+                "error": {
+                    "$ref": "#/definitions/Error"
+                }
+            }
+        },
+        "Location": {
+            "type": "object",
+            "required": [
+                "parcelShopId",
+                "latitude",
+                "longitude",
+                "description",
+                "phoneNumber",
+                "address",
+                "businessHours",
+                "facilities",
+                "distance",
+                "services"
+            ],
+            "properties": {
+                "parcelShopId": {
+                    "type": "string",
+                    "description": "The unique parcelshopId id of the location."
+                },
+                "latitude": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The latitude part co-ordinate of the location."
+                },
+                "longitude": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The latitude part co-ordinate of the location."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the location."
+                },
+                "phoneNumber": {
+                    "type": "string",
+                    "description": "The phone number of the location."
+                },
+                "address": {
+                    "$ref": "#/definitions/Address"
+                },
+                "businessHours": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OpenHours"
+                    }
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Service"
+                    }
+                },
+                "facilities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Facility"
+                    }
+                },
+                "distance": {
+                    "type": "integer",
+                    "description": "The distance of the location relative to the search location origin."
+                }
+            }
+        },
+        "Address": {
+            "type": "object",
+            "required": [
+                "street",
+                "city",
+                "postCode"
+            ],
+            "properties": {
+                "street": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "postCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "Service": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "enum": [
+                        "Print in Store"
+                    ]
+                }
+            }
+        },
+        "Facility": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "enum": [
+                        "Parking",
+                        "Large storage space",
+                        "ATM",
+                        "Bill payment terminal",
+                        "Cr/Dd facility",
+                        "Lottery",
+                        "7 Day Opening Hours",
+                        "Sells alcohol",
+                        "Sells tobacco"
+                    ]
+                }
+            }
+        },
+        "OpenHours": {
+            "type": "object",
+            "required": [
+                "dayOfWeek",
+                "openTime",
+                "closedTime"
+            ],
+            "properties": {
+                "dayOfWeek": {
+                    "type": "string",
+                    "description": "The day of the week.",
+                    "enum": [
+                        "Mon",
+                        "Tue",
+                        "Wed",
+                        "Thu",
+                        "Fri",
+                        "Sat",
+                        "Sun"
+                    ]
+                },
+                "openTime": {
+                    "type": "string",
+                    "description": "The time the premesis opens (24h)."
+                },
+                "closedTime": {
+                    "type": "string",
+                    "description": "The time the premesis closes (24h)."
+                }
+            }
+        },
+        "Health": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
