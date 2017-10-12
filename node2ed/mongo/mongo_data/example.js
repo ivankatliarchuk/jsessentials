@@ -1,0 +1,1 @@
+db.Todos.insert({text: 'Message'})
