@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "stop": "exit 1",
-    "test": "mocha server/**/*.test.js && exit 1"
+    "test": "mocha server/**/*.test.js --bail --exit --reporter spec"
   },
   "author": "",
   "license": "ISC",

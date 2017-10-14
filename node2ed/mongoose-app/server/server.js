@@ -2,16 +2,15 @@ const
     express = require('express'),
     bodyParser = require('body-parser');
 
-let
+const
     { mongoose } = require('./db/mongoose'),
     { Todo } = require('./models/todo'),
     { User } = require('./models/user');
 
-let app = express();
+const app = express();
 app.use(bodyParser.json());
 
-app.post('/todos', (req, res) => {
-    console.log(req.body);
+app.post('/todos', (req, res) => {  
 
     let { body } = req;
     let todo = new Todo({
@@ -28,11 +27,13 @@ app.post('/todos', (req, res) => {
 });
 
 app.get('/todos', (req, res) => {
-    console.log('Not yet implemented');
+    Todo.find().then((todos) => {
+        res.status(200).json({ todos: todos });
+    }).catch((error) => res.status(400).json({ error: err.message }));
 });
 
-// app.listen(3000, () => {
-//     console.log('Started on port 3000');
-// });
+app.listen(3000, () => {
+    console.log('Started on port 3000');
+});
 
 module.exports = { app };

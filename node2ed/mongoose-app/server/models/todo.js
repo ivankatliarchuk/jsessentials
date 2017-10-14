@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const todosSchema = new Schema({
     text: {
         type: String,
-        required: true,
+        required: "Text is required",
         minlength: 1,
         maxlength: 25,
         trim: true
