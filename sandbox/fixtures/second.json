@@ -1,0 +1,67 @@
+{
+    "total": 11,
+    "nextPage": "/page/third",
+    "done": false,
+    "records": [
+        {
+            "parcelShopId": "S07400",
+            "latitude": 51.997469,
+            "longitude": -1.20297,
+            "description": "CO-OP CROUGHTON",
+            "phoneNumber": "01869 811473",
+            "address": {
+                "street": "Park End",
+                "postCode": "NN13 5LX",
+                "city": "Croughton"
+            },
+            "facilities": [],
+            "services": [],
+            "distance": 3613
+        },
+        {
+            "parcelShopId": "S35614",
+            "latitude": 52.032377,
+            "longitude": -1.143805,
+            "description": "CO-OP HIGH STREET BRACKLEY",
+            "phoneNumber": "01280 703595",
+            "address": {
+                "street": "97/99 High Street, Brackley",
+                "postCode": "NN13 7BW",
+                "city": "Northampton"
+            },
+            "facilities": [],
+            "services": [],
+            "distance": 6799
+        },
+        {
+            "parcelShopId": "S23692",
+            "latitude": 51.90777,
+            "longitude": -1.1508,
+            "description": "CO-OP BUCKINGHAM ROAD",
+            "phoneNumber": "01869 247105",
+            "address": {
+                "street": "Unit 1 Audley House, Buckingham Road,",
+                "postCode": "OX26 3AH",
+                "city": "Bicester"
+            },
+            "facilities": [],
+            "services": [],
+            "distance": 7362
+        },
+        {
+            "parcelShopId": "S35613",
+            "latitude": 52.024072,
+            "longitude": -1.270448,
+            "description": "CO-OP KINGS SUTTON OX17 3RT",
+            "phoneNumber": "01295 811278",
+            "address": {
+                "street": "45 Richmond Street,",
+                "postCode": "OX17 3RT",
+                "city": "Kings Sutton"
+            },
+            "facilities": [],
+            "services": [],
+            "distance": 9015
+        }
+    ]
+}
