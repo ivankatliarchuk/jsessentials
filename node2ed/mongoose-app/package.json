@@ -1,14 +1,16 @@
 {
-  "name": "mongo",
+  "name": "mongoose-app",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server/server.js",
   "scripts": {
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^2.2.33"
+    "bluebird": "^3.5.1",
+    "mongoose": "^4.12.1"
   }
 }

@@ -1,2 +1,2 @@
-db.getCollection('Todos').find({});
-db.getCollection('Users').find({});
+db.getCollection('todos').find({});
+db.getCollection('users').find({});
