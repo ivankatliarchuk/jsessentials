@@ -1,50 +1,38 @@
-const mongoose = require('mongoose');
-const config = require('../config');
-const { Schema } = mongoose;
+const
+    express = require('express'),
+    bodyParser = require('body-parser');
 
-mongoose.Promise = require('bluebird');
-mongoose.connect(config.getDbConnectionString(),
-    {
-        useMongoClient: true
-    }).then(() => {
-        console.log('Connection Established')
-    }).catch((err) => {
-        console.log(`Not able to connect ${err.code} ${err.message}`)
+let
+    { mongoose } = require('./db/mongoose'),
+    { Todo } = require('./models/todo'),
+    { User } = require('./models/user');
+
+let app = express();
+app.use(bodyParser.json());
+
+app.post('/todos', (req, res) => {
+    console.log(req.body);
+
+    let { body } = req;
+    let todo = new Todo({
+        text: body.text
     });
 
-const todosSchema = new Schema({
-    text: {
-        type: String
-    },
-    completed: {
-        type: Boolean
-    },
-    completedAt: {
-        type: Number
-    }
+    todo.save()
+        .then((doc) => {
+            res.status(201).json(doc);
+        })
+        .catch((err) => {
+            res.status(400).json({ error: err.message });
+        });
 });
 
-const Todo = mongoose.model('Todos', todosSchema);
+app.get('/todos', (req, res) => {
+    console.log('Not yet implemented');
+});
 
-// let newTodo = new Todo({
-//     text: 'Cook dinner',
-//     completed: false,
-//     completedAt: 1234
+// app.listen(3000, () => {
+//     console.log('Started on port 3000');
 // });
 
-// newTodo.save().then((doc) => {
-//     console.log('Saved todo', doc)
-// }).catch((error) => {
-//     console.error('Unable to save', error);
-// });
-
-let otherTodo = new Todo({
-    
-});
-
-otherTodo.save().then((doc) => {
-    console.log('Saved todo', doc)
-}).catch((error) => {
-    console.error('Unable to save', error);
-});
-
+module.exports = { app };
