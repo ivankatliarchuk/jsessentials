@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "stop": "exit 1",
-    "test": "mocha server/**/*.test.js --bail --exit --reporter spec"
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js --bail --exit --reporter spec"
   },
   "author": "",
   "license": "ISC",
@@ -14,8 +14,9 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "mongoose": "^4.12.1",
-    "mongodb": "^2.2.33"
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.12.1"
   },
   "devDependencies": {
     "expect": "^21.2.1",

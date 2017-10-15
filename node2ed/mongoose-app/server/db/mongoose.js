@@ -6,7 +6,7 @@ mongoose.connect(config.getDbConnectionString(),
     {
         useMongoClient: true
     }).then(() => {
-        console.log('Connection Established')
+        // console.log('Connection Established')
     }).catch((err) => {
         console.log(`Not able to connect ${err.code} ${err.message}`)
     });
