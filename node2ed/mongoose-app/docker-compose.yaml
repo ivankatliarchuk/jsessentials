@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+  mongodb:
+     image: tutum/mongodb:latest
+     container_name: "mongodb"
+     hostname: mongodb
+     ports:
+        - 27017:27017
+     environment:
+        - MONGODB_DATABASE=nodejs
+        - AUTH=no
+        - OPLOG_SIZE=50
+     volumes:
+        - ./volumes/db:/data/db
+     networks:
+       internal:
+        ipv4_address: 172.16.11.6
+  robomongo:
+     image: robomongo
+     container_name: "robomongo"
+     hostname: robomongo
+     environment:
+        - DISPLAY=$DISPLAY
+     volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
+        - ./mongo_data:/develop/data
+     networks:
+       internal:
+        ipv4_address: 172.16.11.14
+     depends_on: 
+        - mongodb
+                          
+
+networks:
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          - subnet: 172.16.11.0/24  

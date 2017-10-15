@@ -1,6 +1,7 @@
 const
     express = require('express'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    { ObjectID } = require('mongodb');
 
 const
     { mongoose } = require('./db/mongoose'),
@@ -10,7 +11,7 @@ const
 const app = express();
 app.use(bodyParser.json());
 
-app.post('/todos', (req, res) => {  
+app.post('/todos', (req, res) => {
 
     let { body } = req;
     let todo = new Todo({
@@ -30,6 +31,23 @@ app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
         res.status(200).json({ todos: todos });
     }).catch((error) => res.status(400).json({ error: err.message }));
+});
+
+app.get('/todo/:id', (req, res) => {
+    let { id } = req.params;
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).json();
+    }
+    Todo.findById({
+        _id: id
+    }).then((todo) => {
+        if (!todo) {
+            return res.status(400).json();
+        }
+        return res.status(200).json({ todo })
+    }).catch((err) => {
+        return res.status(400).json();
+    });
 });
 
 app.listen(3000, () => {
