@@ -88,6 +88,27 @@ app.patch('/todos/:id', (req, res) => {
     });
 });
 
+// USERS
+/*
+curl -X POST \
+  http://localhost:3000/users \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -d '{
+	"email": "andrew@example.com",
+	"password": "abc234#"
+}'
+*/
+app.post('/users', (req, res) => {
+    let body = _.pick(req.body, ['email', 'password']);
+    let user = new User(body);
+    user.save().then((user) => {
+        res.status(201).json(user);
+    }).catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 app.listen(3000, () => {
     console.log('Started on port 3000');
 });
