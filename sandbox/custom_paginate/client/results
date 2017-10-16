@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "metaData": {
+    "timestamp": "Mon, 16 Oct 2017 13:35:22 GMT",
+    "records": 11
+  },
+  "data": [
+    {
+      "parcelShopId": "S04106",
+      "latitude": 52.975754,
+      "longitude": -1.168309,
+      "description": "BEST ONE NG7 7FY",
+      "phoneNumber": "01159 785339",
+      "address": {
+        "street": "60/62 Northgate Road",
+        "postCode": "NG7 7FY",
+        "city": "New Basford"
+      },
+      "services": []
+    },
+    {
+      "parcelShopId": "S01027",
+      "latitude": 52.966799,
+      "longitude": -1.171632,
+      "description": "PETERS CONVENIENCE STORE LTD.",
+      "phoneNumber": "01159783089",
+      "address": {
+        "street": "141 Radford Road",
+        "postCode": "NG7 5DU",
+        "city": "Hyson Green"
+      },
+      "services": []
+    },
+    {
+      "parcelShopId": "S02972",
+      "latitude": 52.97286,
+      "longitude": -1.154729,
+      "description": "CARRINGTON SERVICE STATION",
+      "phoneNumber": "01159-605-277",
+      "address": {
+        "street": "Hucknall Road\r\nCarrington",
+        "postCode": "NG5 1BJ",
+        "city": "Nottingham"
+      },
+      "services": []
+    },
+    {
+      "parcelShopId": "S01982",
+      "latitude": 52.988841,
+      "longitude": -1.180412,
+      "description": "SHERGILLS CON STORE NG6 0DT",
+      "phoneNumber": "01159701358",
+      "address": {
+        "street": "58 Park Lane",
+        "postCode": "NG6 0DT",
+        "city": "Old Basford"
+      },
+      "services": []
+    },
+    {
+      "parcelShopId": "S07634",
+      "latitude": 52.954371,
+      "longitude": -1.168097,
+      "description": "BEST ONE NG7 1PQ",
+      "phoneNumber": "N/A",
+      "address": {
+        "street": "167-171 Derby Road",
+        "postCode": "NG7 1PQ",
+        "city": "Nottingham"
+      },
+      "services": []
+    },
+    {
+      "parcelShopId": "S07400",
+      "latitude": 51.997469,
+      "longitude": -1.20297,
+      "description": "CO-OP CROUGHTON",
+      "phoneNumber": "01869 811473",
+      "address": {
+        "street": "Park End",
+        "postCode": "NN13 5LX",
+        "city": "Croughton"
+      },
+      "facilities": [],
+      "services": []
+    },
+    {
+      "parcelShopId": "S35614",
+      "latitude": 52.032377,
+      "longitude": -1.143805,
+      "description": "CO-OP HIGH STREET BRACKLEY",
+      "phoneNumber": "01280 703595",
+      "address": {
+        "street": "97/99 High Street, Brackley",
+        "postCode": "NN13 7BW",
+        "city": "Northampton"
+      },
+      "facilities": [],
+      "services": []
+    },
+    {
+      "parcelShopId": "S23692",
+      "latitude": 51.90777,
+      "longitude": -1.1508,
+      "description": "CO-OP BUCKINGHAM ROAD",
+      "phoneNumber": "01869 247105",
+      "address": {
+        "street": "Unit 1 Audley House, Buckingham Road,",
+        "postCode": "OX26 3AH",
+        "city": "Bicester"
+      },
+      "facilities": [],
+      "services": []
+    },
+    {
+      "parcelShopId": "S35613",
+      "latitude": 52.024072,
+      "longitude": -1.270448,
+      "description": "CO-OP KINGS SUTTON OX17 3RT",
+      "phoneNumber": "01295 811278",
+      "address": {
+        "street": "45 Richmond Street,",
+        "postCode": "OX17 3RT",
+        "city": "Kings Sutton"
+      },
+      "facilities": [],
+      "services": []
+    },
+    {
+      "parcelShopId": "S12419",
+      "latitude": 51.508393,
+      "longitude": -0.126372,
+      "description": "COOP - STRAND",
+      "phoneNumber": "02078 394570",
+      "address": {
+        "street": "456-459 Strand",
+        "postCode": "WC2R 0RG",
+        "city": "Greater London"
+      },
+      "facilities": [],
+      "services": []
+    },
+    {
+      "parcelShopId": "S31506",
+      "latitude": 51.515725,
+      "longitude": -0.123821,
+      "description": "DRURY NEWS WC2B",
+      "phoneNumber": "02073 793494",
+      "address": {
+        "street": "15 Drury Lane,",
+        "postCode": "WC2B 5RB",
+        "city": "Covent Garden"
+      },
+      "services": []
+    }
+  ]
+}

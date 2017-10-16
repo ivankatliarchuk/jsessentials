@@ -1,0 +1,72 @@
+{
+    "total": 11,
+    "nextPage": "/page/second",
+    "done": false,
+    "records": [
+        {
+            "parcelShopId": "S04106",
+            "latitude": 52.975754,
+            "longitude": -1.168309,
+            "description": "BEST ONE NG7 7FY",
+            "phoneNumber": "01159 785339",
+            "address": {
+                "street": "60/62 Northgate Road",
+                "postCode": "NG7 7FY",
+                "city": "New Basford"
+            },
+            "services": []
+        },
+        {
+            "parcelShopId": "S01027",
+            "latitude": 52.966799,
+            "longitude": -1.171632,
+            "description": "PETERS CONVENIENCE STORE LTD.",
+            "phoneNumber": "01159783089",
+            "address": {
+                "street": "141 Radford Road",
+                "postCode": "NG7 5DU",
+                "city": "Hyson Green"
+            },
+            "services": []
+        },
+        {
+            "parcelShopId": "S02972",
+            "latitude": 52.97286,
+            "longitude": -1.154729,
+            "description": "CARRINGTON SERVICE STATION",
+            "phoneNumber": "01159-605-277",
+            "address": {
+                "street": "Hucknall Road\r\nCarrington",
+                "postCode": "NG5 1BJ",
+                "city": "Nottingham"
+            },
+            "services": []
+        },
+        {
+            "parcelShopId": "S01982",
+            "latitude": 52.988841,
+            "longitude": -1.180412,
+            "description": "SHERGILLS CON STORE NG6 0DT",
+            "phoneNumber": "01159701358",
+            "address": {
+                "street": "58 Park Lane",
+                "postCode": "NG6 0DT",
+                "city": "Old Basford"
+            },
+            "services": []
+        },
+        {
+            "parcelShopId": "S07634",
+            "latitude": 52.954371,
+            "longitude": -1.168097,
+            "description": "BEST ONE NG7 1PQ",
+            "phoneNumber": "N/A",
+            "address": {
+                "street": "167-171 Derby Road",
+                "postCode": "NG7 1PQ",
+                "city": "Nottingham"
+            },
+            "services": []
+        }
+    ]
+}

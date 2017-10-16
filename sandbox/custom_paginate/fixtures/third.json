@@ -1,0 +1,34 @@
+{
+    "total": 11,
+    "nextPage": "",
+    "done": true,
+    "records": [
+        {
+            "parcelShopId": "S12419",
+            "latitude": 51.508393,
+            "longitude": -0.126372,
+            "description": "COOP - STRAND",
+            "phoneNumber": "02078 394570",
+            "address": {
+                "street": "456-459 Strand",
+                "postCode": "WC2R 0RG",
+                "city": "Greater London"
+            },
+            "facilities": [],
+            "services": []
+        },
+        {
+            "parcelShopId": "S31506",
+            "latitude": 51.515725,
+            "longitude": -0.123821,
+            "description": "DRURY NEWS WC2B",
+            "phoneNumber": "02073 793494",
+            "address": {
+                "street": "15 Drury Lane,",
+                "postCode": "WC2B 5RB",
+                "city": "Covent Garden"
+            },
+            "services": []
+        }
+    ]
+}

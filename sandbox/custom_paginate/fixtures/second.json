@@ -15,8 +15,7 @@
                 "city": "Croughton"
             },
             "facilities": [],
-            "services": [],
-            "distance": 3613
+            "services": []
         },
         {
             "parcelShopId": "S35614",
@@ -30,8 +29,7 @@
                 "city": "Northampton"
             },
             "facilities": [],
-            "services": [],
-            "distance": 6799
+            "services": []
         },
         {
             "parcelShopId": "S23692",
@@ -45,8 +43,7 @@
                 "city": "Bicester"
             },
             "facilities": [],
-            "services": [],
-            "distance": 7362
+            "services": []
         },
         {
             "parcelShopId": "S35613",
@@ -60,8 +57,7 @@
                 "city": "Kings Sutton"
             },
             "facilities": [],
-            "services": [],
-            "distance": 9015
+            "services": []
         }
     ]
 }
