@@ -37,4 +37,10 @@ networks:
     ipam:
       driver: default
       config:
-          - subnet: 172.16.11.0/24  
+          - subnet: 172.16.11.0/24
+
+# build image
+# docker build -t robomongo .
+# Add docker the rights to access the X-server
+# xhost +local:docker
+# docker run -it -v /tmp/.X11-unix:/tmp/.X11-unix -u 0 -e DISPLAY=$DISPLAY robomongo

@@ -7,7 +7,8 @@ const
 const
     { mongoose } = require('./db/mongoose'),
     { Todo } = require('./models/todo'),
-    { User } = require('./models/user');
+    { User } = require('./models/user'),
+    { authenticate } = require('./middleware/authenticate');
 
 const app = express();
 app.use(bodyParser.json());
@@ -98,6 +99,9 @@ curl -X POST \
 	"email": "andrewabc@example.com",
     "password": "abc234#"    
 }'
+
+Header
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWU1YWJhMjg5NGI1ZjMxOGZlMjU4OTAiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTA4MjIzOTA2fQ.xmV5lCrZ9UEugt2Cg-4t6JQXeIbUu99S6qHQz61kq_0
 */
 app.post('/users', (req, res) => {
     let body = _.pick(req.body, ['email', 'password']);
@@ -110,6 +114,11 @@ app.post('/users', (req, res) => {
     }).catch((error) => {
         res.status(400).send(error);
     });
+});
+
+
+app.get('/users/me', authenticate, (req, res) => {
+    res.status(200).json(req.user);
 });
 
 app.listen(3000, () => {
