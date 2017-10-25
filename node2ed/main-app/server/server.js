@@ -99,7 +99,10 @@ curl -X POST \
 	"email": "andrewabc@example.com",
     "password": "abc234#"    
 }'
-
+{
+	"email": "andrew@example.com",
+	"password": "1234qwe"
+}
 Header
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWU1YWJhMjg5NGI1ZjMxOGZlMjU4OTAiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTA4MjIzOTA2fQ.xmV5lCrZ9UEugt2Cg-4t6JQXeIbUu99S6qHQz61kq_0
 */
