@@ -313,7 +313,24 @@ describe('API Server Tests', () => {
         });
     });
 
-    describe('', () => {
-        
+    describe('DELETE /users/me/token', () => {
+        it('should remove auth tone on logout', (done) => {
+            request(app)
+                .delete(`/users/me/token`)
+                .set('x-auth', users[0].tokens[0].token)
+                .expect(204)
+                .end((err) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    // query database for a user that we potentially craete a token
+                    User.findById(users[0]._id).then((user) => {
+                        expect(user.tokens.length).toBe(0);
+                        done();
+                    }).catch((err) => {
+                        done(err);
+                    });
+                });
+        });
     });
 });
