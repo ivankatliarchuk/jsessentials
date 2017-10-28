@@ -37,7 +37,7 @@ const UserSchema = new Schema({
         }
     ]
 });
-
+// Instance methods
 UserSchema.methods.toJSON = function () {
     let user = this;
     let userObject = user.toObject();
@@ -60,6 +60,18 @@ UserSchema.methods.generateAuthToken = function () {
 
     return user.save().then(() => {
         return token;
+    });
+};
+
+UserSchema.methods.removeToken = function (token) {
+    let user = this;   
+    return user.update({
+        // remove item from an array that match certain criteria
+        $pull: {
+            tokens: {
+              token: token
+           }
+        }
     });
 };
 
