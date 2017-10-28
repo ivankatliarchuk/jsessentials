@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
-const bcrypt = require('bcryptjs');
+const Promise = require('bluebird');
+const bcrypt = Promise.promisifyAll(require('bcryptjs'));
 
 const UserSchema = new Schema({
     email: {
@@ -74,6 +75,25 @@ UserSchema.statics.findByToken = function (token) {
         '_id': decoded._id,
         'tokens.token': token,
         'tokens.access': 'auth'
+    });
+};
+
+UserSchema.statics.findByCredentials = function (email, password) {
+    let User = this;
+    // REVIEW password can be hashed to find by password as well
+    return User.findOne({ email }).then((user) => {        
+        if (!user) {
+            return Promise.reject();
+        }
+        return new Promise((resolve, reject) => {
+            bcrypt.compareAsync(password, user.password).then((result) => {
+                if (result) {
+                    resolve(user);
+                } else {
+                    reject();
+                }                
+            });
+        });
     });
 };
 

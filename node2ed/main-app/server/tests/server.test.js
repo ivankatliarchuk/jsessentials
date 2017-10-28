@@ -158,7 +158,7 @@ describe('API Server Tests', () => {
                 .expect((res) => {
                     expect(res.body.todo.text).toBe(text);
                     expect(res.body.todo.completed).toBe(true);
-                    expect(res.body.todo.completedAt).toBeDefined();
+                    expect(res.body.todo.completedAt).toBeA('number');
                 })
                 .end(done);
         });
@@ -176,7 +176,7 @@ describe('API Server Tests', () => {
                 .expect((res) => {
                     expect(res.body.todo.text).toBe(text);
                     expect(res.body.todo.completed).toBe(false);
-                    expect(res.body.todo.completedAt).toBeNull();
+                    expect(res.body.todo.completedAt).toNotExist();
                 })
                 .end(done);
         });
@@ -217,8 +217,8 @@ describe('API Server Tests', () => {
                 .send({ email, password })
                 .expect(201)
                 .expect((res) => {
-                    expect(res.headers['x-auth']).not.toBeNull();
-                    expect(res.body._id).not.toBeNull();
+                    expect(res.headers['x-auth']).toExist();
+                    expect(res.body._id).toExist();
                     expect(res.body.email).toBe(email);
                 })
                 .end((err) => {
@@ -227,8 +227,8 @@ describe('API Server Tests', () => {
                     }
 
                     User.findOne({ email }).then((user) => {
-                        expect(user).not.toBeNull();
-                        expect(user.password).not.toBe(password);
+                        expect(user).toExist();
+                        expect(user.password).toNotBe(password);
                     }).then(done);
                 });
         });
@@ -242,9 +242,9 @@ describe('API Server Tests', () => {
                 .send({ email, password })
                 .expect(400)
                 .expect((res) => {
-                    expect(res.body.errors).not.toBeNull();
-                    expect(res.body.errors.password).not.toBeNull();
-                    expect(res.body.errors.email).not.toBeNull();
+                    expect(res.body.errors).toExist();
+                    expect(res.body.errors.password).toExist();
+                    expect(res.body.errors.email).toExist();
                 })
                 .end(done);
         });
@@ -257,10 +257,59 @@ describe('API Server Tests', () => {
                 .post('/users')
                 .send({ email, password })
                 .expect(400)
-                .expect((res) => {
-                    expect(res.body._id).not.toBeDefined();
-                })
                 .end(done);
+        });
+    });
+
+    describe('PUT /users/login', () => {
+        it('should login and return auth token', (done) => {
+            request(app)
+                .put('/users/login')
+                .send({
+                    email: users[1].email,
+                    password: users[1].password
+                })
+                .expect(200)
+                .expect((res) => {
+                    expect(res.headers['x-auth']).toExist();                  
+                })
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    // query database for a user that we potentially craete a token
+                    User.findById(users[1]._id).then((user) => {
+                        expect(user.tokens[0]).toInclude({
+                            access: 'auth',
+                            token: res.headers['x-auth']
+                        });
+                        done();
+                    }).catch((err) => {
+                        done(err);
+                    });
+                });
+        });
+
+        it('should reject invalid login', (done) => {
+            request(app)
+                .put('/users/login')
+                .send({
+                    email: users[1].email,
+                    password: users[1].password + '1'
+                })
+                .expect(400)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    // query database for a user that we potentially craete a token
+                    User.findById(users[1]._id).then((user) => {
+                        expect(user.tokens.length).toBe(0);
+                        done();
+                    }).catch((err) => {
+                        done(err);
+                    });
+                });
         });
     });
 });
