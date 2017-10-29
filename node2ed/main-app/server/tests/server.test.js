@@ -203,6 +203,20 @@ describe('API Server Tests', () => {
                 .end(done);
         });
 
+        it('should not update other user todo', (done) => {
+            let hexId = todos[0]._id.toHexString();
+            let text = 'This should be the new text';
+            request(app)
+                .patch(`/todos/${hexId}`)
+                .set('x-auth', users[1].tokens[0].token)
+                .send({
+                    text: text,
+                    completed: true
+                })
+                .expect(404)
+                .end(done);
+        });
+
         it('should clear \'completedAt\' when todo is not completed', (done) => {
             let hexId = todos[1]._id.toHexString();
             let text = 'This should be the new text';
