@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "stop": "exit 1",
-    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js --bail --exit --reporter spec"
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js  --exit --reporter spec"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +23,7 @@
     "validator": "^9.0.0"
   },
   "devDependencies": {
-    "expect": "^1.20.2",
+    "expect": "^21.2.1",
     "mocha": "^4.0.1",
     "supertest": "^3.0.0"
   }

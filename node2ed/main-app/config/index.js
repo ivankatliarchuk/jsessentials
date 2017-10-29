@@ -1,4 +1,4 @@
-let config = require('./config');
+let config = require('./config.json');
 
 module.exports = {
     getDbConnectionString: function() {

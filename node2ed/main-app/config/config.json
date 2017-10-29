@@ -1,13 +1,5 @@
 {
     "host": "172.16.11.6",
     "port": "27017",
-    "dbname": "nodejs",
-    "test": {
-        "PORT": 3000,
-        "MONGODB_URI": "mongodb://localhost:27017/TodoAppTest"
-    },
-    "development": {
-        "PORT": 3000,
-        "MONGODB_URI": "mongodb://172.16.11.6:27017/TodoAppTest"
-    }
+    "dbname": "nodejs"
 }
