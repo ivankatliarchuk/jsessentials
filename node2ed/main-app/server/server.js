@@ -1,3 +1,5 @@
+'user strict';
+
 const
     _ = require('lodash'),
     express = require('express'),
@@ -13,11 +15,12 @@ const
 const app = express();
 app.use(bodyParser.json());
 
-app.post('/todos', (req, res) => {
+app.post('/todos', authenticate, (req, res) => {
 
     let { body } = req;
     let todo = new Todo({
-        text: body.text
+        text: body.text,
+        _creator: req.user._id
     });
 
     todo.save()
@@ -29,19 +32,22 @@ app.post('/todos', (req, res) => {
         });
 });
 
-app.get('/todos', (req, res) => {
-    Todo.find().then((todos) => {
+app.get('/todos', authenticate, (req, res) => {
+    Todo.find({
+        _creator: req.user._id
+    }).then((todos) => {
         res.status(200).json({ todos: todos });
     }).catch((error) => res.status(400).json({ error: err.message }));
 });
 
-app.get('/todos/:id', (req, res) => {
+app.get('/todos/:id', authenticate, (req, res) => {
     let { id } = req.params;
     if (!ObjectID.isValid(id)) {
         return res.status(404).json();
     }
-    Todo.findById({
-        _id: id
+    Todo.findOne({
+        _id: id,
+        _creator: req.user._id
     }).then((todo) => {
         if (!todo) {
             return res.status(404).json();
@@ -52,12 +58,15 @@ app.get('/todos/:id', (req, res) => {
     });
 });
 
-app.delete('/todos/:id', (req, res) => {
+app.delete('/todos/:id', authenticate, (req, res) => {
     let { id } = req.params;
     if (!ObjectID.isValid(id)) {
         return res.status(404).json();
     }
-    Todo.findByIdAndRemove(id).then((result) => {
+    Todo.findOneAndRemove({
+        _id: id,
+        _creator: req.user._id
+    }).then((result) => {
         if (!result) {
             return res.status(404).json();
         }
@@ -65,7 +74,7 @@ app.delete('/todos/:id', (req, res) => {
     }).catch((error) => res.status(404).end());
 });
 
-app.patch('/todos/:id', (req, res) => {
+app.patch('/todos/:id', authenticate, (req, res) => {
     let { id } = req.params;
     let body = _.pick(req.body, ['text', 'completed']);
     if (!ObjectID.isValid(id)) {
@@ -133,8 +142,8 @@ app.put('/users/login', (req, res) => {
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
             res.header('x-auth', token).status(200).json(user);
-        });        
-    }).catch((err) => {        
+        });
+    }).catch((err) => {
         res.status(400).send();
     });
 });

@@ -17,6 +17,7 @@ describe('API Server Tests', () => {
             let text = 'Test todo Mocha';
             request(app)
                 .post('/todos')
+                .set('x-auth', users[0].tokens[0].token)
                 .send({
                     text: text
                 })
@@ -41,6 +42,7 @@ describe('API Server Tests', () => {
             const error = 'Todo validation failed: text: Text is required';
             request(app)
                 .post('/todos')
+                .set('x-auth', users[0].tokens[0].token)
                 .send({})
                 .expect(400)
                 .expect((res) => {
@@ -63,9 +65,10 @@ describe('API Server Tests', () => {
         it('should get all todos', (done) => {
             request(app)
                 .get('/todos')
+                .set('x-auth', users[0].tokens[0].token)
                 .expect(200)
                 .expect((res) => {
-                    expect(res.body.todos.length).toBe(2);
+                    expect(res.body.todos.length).toBe(1);
                 })
                 .end((err, res) => {
                     if (err) {
@@ -82,6 +85,7 @@ describe('API Server Tests', () => {
         it('should return todo doc', (done) => {
             request(app)
                 .get(`/todos/${todos[0]._id.toHexString()}`)
+                .set('x-auth', users[0].tokens[0].token)  
                 .expect(200)
                 .expect((res) => {
                     expect(res.body.todo.text).toBe('First text todo');
@@ -89,10 +93,20 @@ describe('API Server Tests', () => {
                 .end(done);
         });
 
+        it('should not return todo doc created by other user', (done) => {
+            let hexId = new ObjectID().toHexString();
+            request(app)
+                .get(`/todos/${todos[1]._id.toHexString()}`)
+                .set('x-auth', users[0].tokens[0].token)
+                .expect(404)
+                .end(done);
+        });
+
         it('should return 404 if todo not found', (done) => {
             let hexId = new ObjectID().toHexString();
             request(app)
                 .get(`/todos/${hexId}`)
+                .set('x-auth', users[1].tokens[0].token)
                 .expect(404)
                 .end(done);
         });
@@ -100,6 +114,7 @@ describe('API Server Tests', () => {
         it('should return 404 for non-object ids', (done) => {
             request(app)
                 .get(`/todos/123abc`)
+                .set('x-auth', users[1].tokens[0].token)  
                 .expect(404)
                 .end(done);
         });
@@ -110,6 +125,7 @@ describe('API Server Tests', () => {
             let hexId = todos[1]._id.toHexString();
             request(app)
                 .delete(`/todos/${hexId}`)
+                .set('x-auth', users[1].tokens[0].token)
                 .expect(204)
                 .expect((res) => {
                     //
@@ -120,16 +136,39 @@ describe('API Server Tests', () => {
                     } else {
                         request(app)
                             .get(`/todos/${hexId}`)
+                            .set('x-auth', users[1].tokens[0].token)
                             .expect(404)
                             .end(done)
                     }
                 });
         });
 
-        it('should return 404 if item not found', (done) => {
-            let hexId = new ObjectID().toHexString();
+        it('should not remove a todo that not belong to user', (done) => {
+            let hexId = todos[0]._id.toHexString();
             request(app)
                 .delete(`/todos/${hexId}`)
+                .set('x-auth', users[1].tokens[0].token)
+                .expect(404)
+                .expect((res) => {
+                    //
+                })
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    } else {
+                        Todo.findById(hexId).then((todo) => {
+                            expect(todo).toExist();
+                            done();
+                        }).catch(e => done(e));
+                    }
+                });
+        });
+
+        it('should return 404 if item not found', (done) => {
+            let hexId = new ObjectID().toHexString();
+            request(app)                 
+                .delete(`/todos/${hexId}`)
+                .set('x-auth', users[0].tokens[0].token)   
                 .expect(404)
                 .end(done);
         });
@@ -150,6 +189,7 @@ describe('API Server Tests', () => {
             let text = 'This should be the new text';
             request(app)
                 .patch(`/todos/${hexId}`)
+                .set('x-auth', users[0].tokens[0].token)
                 .send({
                     text: text,
                     completed: true
@@ -168,6 +208,7 @@ describe('API Server Tests', () => {
             let text = 'This should be the new text';
             request(app)
                 .patch(`/todos/${hexId}`)
+                .set('x-auth', users[1].tokens[0].token)   
                 .send({
                     text: text,
                     completed: false
@@ -279,7 +320,7 @@ describe('API Server Tests', () => {
                     }
                     // query database for a user that we potentially craete a token
                     User.findById(users[1]._id).then((user) => {
-                        expect(user.tokens[0]).toInclude({
+                        expect(user.tokens[1]).toInclude({
                             access: 'auth',
                             token: res.headers['x-auth']
                         });
@@ -304,7 +345,7 @@ describe('API Server Tests', () => {
                     }
                     // query database for a user that we potentially craete a token
                     User.findById(users[1]._id).then((user) => {
-                        expect(user.tokens.length).toBe(0);
+                        expect(user.tokens.length).toBe(1);
                         done();
                     }).catch((err) => {
                         done(err);
