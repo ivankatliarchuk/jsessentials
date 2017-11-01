@@ -22,10 +22,29 @@ app.use('/', function (req, res, next) {
 
 io.on('connection', (socket) => {
     console.log('new user connected');
-    socket.on('disconnect', () => {
-        console.log('User was disconnected');
+
+    socket.emit('newEmail', {
+        from: 'mike',
+        text: 'Hey. What is going on.',
+        createdAd: 123
     });
+
+    socket.on('createEmail', (newEmail) => {
+        console.log('createEmail', newEmail);
+    });
+
+    socket.emit('newMessage', {
+        text: 'Hey. How are you!',
+        timeStamp: new Date()
+    });
+
+    // socket.on('disconnect', () => {
+    //     console.log('User was disconnected');
+    // });
 });
+
+
+
 
 server.listen(port, () => {
     console.log(`server is up on port ${port}`);
