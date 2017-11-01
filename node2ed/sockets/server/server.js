@@ -1,12 +1,18 @@
 'use strict';
 
-const path = require('path');
-const express = require('express');
+const
+    path = require('path'),
+    express = require('express'),
+    http = require('http'),
+    socketIO = require('socket.io');
 
 const publicPath = path.join(__dirname, '../public');
 
-const app = express();
-const port = process.env.PORT || 3000;
+const
+    app = express(),
+    port = process.env.PORT || 3000,
+    server = http.createServer(app),
+    io = socketIO(server);
 
 app.use(express.static(publicPath));
 app.use('/', function (req, res, next) {
@@ -14,7 +20,13 @@ app.use('/', function (req, res, next) {
     next();
 });
 
+io.on('connection', (socket) => {
+    console.log('new user connected');
+    socket.on('disconnect', () => {
+        console.log('User was disconnected');
+    });
+});
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`server is up on port ${port}`);
 });
