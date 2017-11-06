@@ -29,11 +29,16 @@ io.on('connection', (socket) => {
         createdAd: 123
     });
 
-    socket.on('createEmail', (newEmail) => {
-        console.log('createEmail', newEmail);
+    // socket.on('createEmail', (newEmail) => {
+    //     console.log('createEmail', newEmail);
+    // });
+
+    socket.on('createMessage', (message) => {
+        console.log('createMessage', message);
     });
 
     socket.emit('newMessage', {
+        from: 'John',
         text: 'Hey. How are you!',
         timeStamp: new Date()
     });
