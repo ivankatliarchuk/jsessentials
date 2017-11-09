@@ -13,6 +13,7 @@ const
     port = process.env.PORT || 3000,
     server = http.createServer(app),
     io = socketIO(server),
+    { isRealStreang } = require('./utils/validation'),
     { generateMessage, generateLocationMessage } = require('./utils/message');
 
 app.use(express.static(publicPath));
@@ -24,7 +25,14 @@ app.use('/', function (req, res, next) {
 io.on('connection', (socket) => {
     console.log('new user connected');
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));    
-    socket.broadcast.emit('newMessage', generateMessage('Admin','New user joined'));
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
+    
+    socket.on('join', (params, callback) => {
+        if (!isRealStreang(params.name) || !isRealStreang(params.room)) {
+            callback('Name and room name are required');
+        }
+        callback();
+    });
 
     socket.on('createMessage', (message, callback) => {
         console.log('createMessage', message);                
