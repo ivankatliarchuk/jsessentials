@@ -24,13 +24,24 @@ app.use('/', function (req, res, next) {
 
 io.on('connection', (socket) => {
     console.log('new user connected');
-    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));    
-    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
+  //  socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));    
+   // socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
     
     socket.on('join', (params, callback) => {
         if (!isRealStreang(params.name) || !isRealStreang(params.room)) {
             callback('Name and room name are required');
         }
+
+        socket.join(params.room);
+        // socket.leave(params.room);
+
+        // io.emit -> io.to('The office Fans').emit
+        // socket.broadcast.emit -> socket.broadcast.to('The Office Fans').emit
+        // socket.emit
+
+        socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
+        socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} joined`));
+
         callback();
     });
 
